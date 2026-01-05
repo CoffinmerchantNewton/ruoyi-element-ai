@@ -10,16 +10,6 @@
 <img src="https://cdn.element-plus-x.com/chat/1.webp" />
 </div>
 
-<div align="center">
-
-本项目 CDN 加速及安全防护由 Tencent EdgeOne 赞助
-
-[亚洲最佳CDN、边缘和安全解决方案 - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
-
-<img src="readme/edgeone.png"/>
-
-</div>
-
 ## 🚀 项目亮点
 
 **ruoyi-element-ai** 是基于 **Vue3.5** + **Element-Plus-X** + **hook-fetch** + **TypeScript** + **Eslint9** 开发的企业级AI应用模板，搭配 **ruoyi-ai** 后端，快速构建仿豆包/通义的全栈AI项目。
@@ -43,8 +33,8 @@
 
 | 功能模块         | 说明                          | 链接                                                                 |
 |------------------|-------------------------------|----------------------------------------------------------------------|
-| 🚀 前端仓库 | Gitee/GitHub 代码仓库(感谢 star🥰爱你爱你😘) | [Gitee](https://gitee.com/he-jiayue/ruoyi-element-ai) <br> [GitHub](https://github.com/element-plus-x/ruoyi-element-ai) |
-| 🛠️ 后端仓库 | Java服务，功能丰富强大      |   [Gitee](https://gitee.com/ageerle/ruoyi-ai) <br> [GitHub](https://github.com/ageerle/ruoyi-ai)    |
+| 🚀 前端仓库 | GitHub 代码仓库| [GitHub](https://github.com/CoffinmerchantNewton/ruoyi-element-ai) |
+| 🛠️ 后端仓库 | Java服务，功能丰富强大      |  [GitHub](https://github.com/CoffinmerchantNewton/ruoyi-ai)    |
 | 📚 前端文档 | 开发指南/项目说明              | [快速了解项目](https://chat-docs.element-plus-x.com)       |
 | 📡 在线演示 | 实时交互体验                    | [在线预览](https://chat.element-plus-x.com)                          |
 
@@ -66,10 +56,8 @@
 
 ```bash
 # 克隆项目
-# Gitee
-git clone https://gitee.com/he-jiayue/ruoyi-element-ai.git
 # GitHub
-git clone https://github.com/element-plus-x/ruoyi-element-ai.git
+git clone https://github.com/CoffinmerchantNewton/ruoyi-element-ai.git
 cd ruoyi-element-ai
 
 # 安装依赖（推荐pnpm 避免幻影依赖）
@@ -95,18 +83,3 @@ pnpm cz            # 规范提交（自动执行lint）
 - [ ] 编辑输入框
 - [ ] 文件上传
 - [ ] 其他...
-
-## 🤝 社区支持
-| 👨‍👨‍👧‍👦 微信交流群                          | 💩 作者微信                          |
-|---------------------------------------|-------------------------------------|
-| <img src="https://cdn.element-plus-x.com/vx-2025-07-28.png" alt="微信交流群" width="230px" height="300px" ><br>扫码加入交流群<br>获取最新动态与技术支持 | <img src="https://cdn.element-plus-x.com/vx.png" alt="作者vx" width="230px" height="300px" ><br>群过期或失效？<br>扫码添加作者微信 |
-
-## 🌹 赠人玫瑰，手有余香
-<div align="center">
-<p>😍开源是热爱的坚持，您的每一份心意都让我们走得更远～😍</p>
-<img src="https://cdn.element-plus-x.com/zs1.webp" alt="赞赏" width="230px" height="100%" />
-<h3 style="color: #fa8c16; margin-bottom: 10px;">🙊扫码赞赏，感谢您的支持！🙊</h3>
-<p style="color: #666; margin: 15px 0;">💖感谢每一份温暖助力💖</p>
-<p style="color: #666; margin: 15px 0;">💌 后续将截图保留，并公示赞赏记录 💌</p>
-</div>
-</div>
