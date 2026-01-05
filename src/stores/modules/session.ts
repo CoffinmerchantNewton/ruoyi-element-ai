@@ -189,12 +189,55 @@ export const useSessionStore = defineStore('session', () => {
     }
   };
 
+  // 解析日期字符串，支持 "2025/12/25 下午4:04" 格式
+  function parseDate(dateStr: string | Date | undefined): Date {
+    if (!dateStr) {
+      return new Date();
+    }
+
+    // 如果已经是 Date 对象，直接返回
+    if (dateStr instanceof Date) {
+      return dateStr;
+    }
+
+    // 处理 "2025/12/25 下午4:04" 格式
+    // 将 "下午" 替换为 "PM"，"上午" 替换为 "AM"，并调整小时数
+    const normalizedStr = dateStr.toString();
+
+    // 匹配格式：2025/12/25 下午4:04 或 2025/12/25 上午4:04
+    const match = normalizedStr.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(上午|下午)(\d{1,2}):(\d{2})/);
+    if (match) {
+      const [, year, month, day, period, hour, minute] = match;
+      let hour24 = Number.parseInt(hour, 10);
+
+      // 将12小时制转换为24小时制
+      if (period === '下午' && hour24 !== 12) {
+        hour24 += 12;
+      }
+      else if (period === '上午' && hour24 === 12) {
+        hour24 = 0;
+      }
+
+      // 创建标准日期字符串：YYYY-MM-DD HH:mm
+      const dateString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')} ${hour24.toString().padStart(2, '0')}:${minute}`;
+      return new Date(dateString);
+    }
+
+    // 如果无法解析，尝试使用原生 Date 解析
+    const date = new Date(normalizedStr);
+    if (Number.isNaN(date.getTime())) {
+      // 如果还是无效，返回当前日期
+      return new Date();
+    }
+    return date;
+  }
+
   // 在获取会话列表后添加预处理逻辑（示例）
   function processSessions(sessions: ChatSessionVo[]) {
     const currentDate = new Date();
 
     return sessions.map((session) => {
-      const createDate = new Date(session.createTime!);
+      const createDate = parseDate(session.createTime);
       const diffDays = Math.floor(
         (currentDate.getTime() - createDate.getTime()) / (1000 * 60 * 60 * 24),
       );

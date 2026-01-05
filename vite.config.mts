@@ -24,5 +24,14 @@ export default defineConfig((cnf) => {
         },
       },
     },
+    server: {
+      proxy: {
+        '/dev-api': {
+          target: 'http://localhost:6039',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/dev-api/, ''),
+        },
+      },
+    },
   };
 });

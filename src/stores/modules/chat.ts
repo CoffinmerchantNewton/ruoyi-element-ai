@@ -25,10 +25,13 @@ export const useChatStore = defineStore('chat', () => {
   const setChatMap = (id: string, data: ChatMessageVo[]) => {
     chatMap.value[id] = data?.map((item: ChatMessageVo) => {
       const isUser = item.role === 'user';
-      const thinkContent = extractThkContent(item.content as string);
+      const rawContent = item.content as string || '';
+      const thinkContent = extractThkContent(rawContent);
+      const processedContent = extractThkContentAfter(rawContent);
       return {
         ...item,
         key: item.id,
+        role: isUser ? 'user' : 'system', // 将 assistant 转换为 system
         placement: isUser ? 'end' : 'start',
         isMarkdown: !isUser,
         // variant: 'shadow',
@@ -40,7 +43,7 @@ export const useChatStore = defineStore('chat', () => {
         typing: false,
         reasoning_content: thinkContent,
         thinkingStatus: 'end',
-        content: extractThkContentAfter(item.content as string),
+        content: processedContent,
         thinlCollapse: false,
       };
     });
@@ -65,6 +68,14 @@ export const useChatStore = defineStore('chat', () => {
     }
   };
 
+  // 将字符串中的 \n 转义序列转换为实际的换行符
+  function convertNewlines(content: string | undefined): string {
+    if (!content)
+      return '';
+    // 将字符串字面量 \n 转换为实际的换行符
+    return content.replace(/\\n/g, '\n');
+  }
+
   // 对思考中的内容回显做处理
   function extractThkContent(content: string) {
     const regex = /<think>(.*?)<\/think>/s;
@@ -77,13 +88,13 @@ export const useChatStore = defineStore('chat', () => {
   // 如果有 </think> 标签，则把 </think> 之后的 内容从 content 中返回
   function extractThkContentAfter(content: string) {
     if (!content.includes('</think>')) {
-      return content;
+      return convertNewlines(content);
     }
     const regex = /<\/think>(.*)/s;
     const matchResult = content.match(regex);
     // 把这些内容从 content 中移除
     content = content.replace(regex, '');
-    return matchResult?.[1] ?? '';
+    return convertNewlines(matchResult?.[1] ?? '');
   }
 
   return {

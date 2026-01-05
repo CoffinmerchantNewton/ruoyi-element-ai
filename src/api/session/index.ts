@@ -7,7 +7,7 @@ import type {
 import { del, get, post, put } from '@/utils/request';
 
 export function get_session_list(params: GetSessionListParams) {
-  return get<ChatSessionVo[]>('/system/session/list', params).json();
+  return get<{ total: number; rows: ChatSessionVo[]; code: number; msg: string }>('/system/session/list', params).json();
 }
 
 export function create_session(data: CreateSessionDTO) {
